@@ -84,9 +84,7 @@ function setImage(id, src, alt = '') {
       const pResp = document.createElement('p');
       pResp.innerHTML = `<strong>Responsável:</strong> ${rec["Responsável pelo Desenvolvimento"] || rec.Responsavel || ''}`;
 
-      const pEconomia = document.createElement('p');
-      if (rec.Economia) pEconomia.innerHTML = `<strong>Economia:</strong> R$ ${formatCurrencyBr(rec.Economia)}`;
-
+  
       const img = document.createElement('img');
       img.src = rec.Imagem ? encodeURI(rec.Imagem) : '';
       img.alt = rec.Detalhamento || rec.Item || '';
@@ -117,19 +115,20 @@ function setImage(id, src, alt = '') {
 
   function mapRecordToDevice(rec) {
     const id = String(rec.Item ?? rec.ID ?? rec.id ?? '').trim();
-    const nome = rec.Detalhamento ?? rec.nome ?? `Dispositivo ${id}`;
+    const nome = rec.Item ?? rec.ID ?? rec.id ?? `Dispositivo ${id}`; // <- título agora é o Item
     const molde = rec.Item ?? rec.Molde ?? '';
-    const finalidade = rec.Obs ?? rec.Finalidade ?? rec.Categoria ?? '';
-    const imagem = rec.Imagem ?? rec.imagem ?? '';
+    const finalidade = rec.Detalhamento ?? rec.Obs ?? rec.Finalidade ?? rec.Categoria ?? ''; // <- finalidade pega Detalhamento
+    const imagem = rec.Imagem ?? rec.imagem ?? ''; // <- mantém a imagem
     const resp = rec["Responsável pelo Desenvolvimento"] ?? rec.Responsavel ?? rec.responsavel ?? '';
     let dev1 = '', dev2 = '';
     if (resp) {
-      const parts = resp.split(/;|,/).map(s => s.trim()).filter(Boolean);
-      dev1 = parts[0] ?? '';
-      dev2 = parts[1] ?? '';
+        const parts = resp.split(/;|,/).map(s => s.trim()).filter(Boolean);
+        dev1 = parts[0] ?? '';
+        dev2 = parts[1] ?? '';
     }
     return { id, nome, imagem, molde, finalidade, dev1, dev2, economia: rec.Economia ?? rec["Economia"] ?? '', data: rec.Data ?? '', _raw: rec };
-  }
+}
+
 
   async function fetchWithTimeout(url, opts = {}, timeoutMs = 15000) {
     const controller = new AbortController();

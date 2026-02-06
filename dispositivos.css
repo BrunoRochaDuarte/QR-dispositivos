@@ -3,6 +3,7 @@ body {
   padding: 0;
   background: linear-gradient(180deg, #1f3f75, #244a88);
   font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
 }
 
 /* Container principal */
@@ -15,9 +16,9 @@ body {
   padding-bottom: 30px;
    margin-left: auto;   
   margin-right: auto;
-  background-color: #3f5f93;
-  border-radius: 18px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  background: transparent;
+  box-shadow: none;
+  padding-top: 40px;
 }
 
 /* Título */
@@ -43,18 +44,14 @@ body {
 
 /* Caixas */
 .descricao,
-.desenvolvimento {
-  background: linear-gradient(180deg, #e6eefb, #d9e3f4);
+.desenvolvimento  {
+  background: #ffffff;
   padding: 22px;
-  border-radius: 16px;
+  border-radius: 12px;
   margin-bottom: 25px;
-  border-left: 6px solid #1f3f75;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
-
-.desenvolvimento {
+  border-left: 4px solid #1f3f75;
   margin-bottom: 0;
-   text-align: center;
+  text-align: center; 
 }
 
 /* Títulos internos */
@@ -74,12 +71,26 @@ body {
   color: #333;
 }
 
+.pagina-dev {
+  position: fixed;       
+  bottom: 0;     
+  left: 0;
+  width: 100%;             
+  text-align: center;        /* centraliza o texto */
+   background: rgba(36, 74, 136, 0.95);
+  color: #ffffff;            /* texto branco */
+  font-size: 2rem;         /* menor que o resto do site */
+  padding: 15px 0;           /* espaço em cima e embaixo */
+  font-family: Arial, Helvetica, sans-serif;
+  z-index: 9999;             /* fica acima de tudo */
+}
+
+
 /* Responsivo desktop */
 @media (min-width: 601px) {
   .container {
     max-width: 800px;
   }
   .titulo-dispositivo {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
-}
